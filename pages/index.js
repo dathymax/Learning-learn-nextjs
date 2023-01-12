@@ -1,6 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import HomePage from "../src/components/home";
 
 export async function getServerSideProps() {
 	const { events_categories } = await import("../data/data.json");
@@ -27,30 +26,7 @@ export default function Home({ data = [] }) {
 				/>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<header>
-				<nav>
-					<img />
-					<a href="/">Home</a>
-					<a href="/events">Events</a>
-					<a href="/about-us">About us</a>
-				</nav>
-			</header>
-			<main className={styles.main}>
-				{data.map((event) => {
-					return (
-						<a key={event.id} href={`/events/${event.id}`}>
-							<Image
-								src={event.image}
-								width={300}
-								height={300}
-								alt={event.title}
-							/>
-							<h2>{event.title}</h2>
-							<p>{event.description}</p>
-						</a>
-					);
-				})}
-			</main>
+			<HomePage data={data} />
 		</>
 	);
 }
